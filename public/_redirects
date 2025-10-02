@@ -1,0 +1,5 @@
+# Redirection SPA pour Next.js export statique
+/*  /index.html  200
+
+# Redirection spécifique pour les pages erreur
+/404  /404.html  404 
