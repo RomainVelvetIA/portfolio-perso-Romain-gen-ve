@@ -1,0 +1,36 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "18.17.0"
+
+# Configuration pour Next.js en mode export statique
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Une seule règle de redirection pour le format SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Exception pour les fichiers 404 customisés
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 404
+
+# Configuration spécifique pour la performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable" 
